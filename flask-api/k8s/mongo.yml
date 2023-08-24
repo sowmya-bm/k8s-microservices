@@ -21,6 +21,9 @@ spec:
           volumeMounts:
             - name: storage
               mountPath: /data/db
+          envFrom:
+            - configMapRef:
+                name: mongo-config
       volumes:
         - name: storage
           persistentVolumeClaim:

@@ -1,12 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  labels:
-    app: mongo
-  name: mongo
+  name: mongo-service
 spec:
+  selector:
+    app: mongo  # This should match the labels on your MongoDB pods
   ports:
     - port: 27017
       targetPort: 27017
-  selector:
-    app: mongo
+      # Optional field
+      # By default and for convenience, the Kubernetes control plane will allocate a port from a range (default: 30000-32767)
+      nodePort: 30008 # Port on the pods
+  type: NodePort
+

@@ -5,7 +5,7 @@ metadata:
   labels:
     app: taskmaster
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: taskmaster
@@ -14,9 +14,13 @@ spec:
       labels:
         app: taskmaster
     spec:
+      tolerations:
+      - key: "node-role.kubernetes.io/master"
+        operator: "Exists"
+        effect: "NoSchedule"
       containers:
         - name: taskmaster
-          image: trainwithshubham/taskmaster-python:latest
+          image: sowmyabm/k8s-microservicess-image:latest
           ports:
             - containerPort: 5000
           imagePullPolicy: Always
